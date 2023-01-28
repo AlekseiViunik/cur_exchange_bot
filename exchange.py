@@ -14,15 +14,20 @@ TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_ID")
 ENDPOINT = "https://api.apilayer.com/fixer/latest?base=TRY&symbols=EUR,USD,RUB"
 HEADERS = {"apikey": f"{EXCHANGE_API_TOKEN}"}
-RETRY_TIME = 86400
+HOW_OFTEN = 2   # times a day
+RETRY_TIME = 3600
+SECONDS_IN_DAY = 86400
 
 
 def get_api_answer():
+    """Gets an API answer from endpoint and returns json to parse."""
     response = requests.get(ENDPOINT, headers=HEADERS)
     return response.json()
 
 
 def check_response(response):
+    """Checks response for keys which need us. Returns the same argument which
+    have been given or rises an error."""
     if not isinstance(response, dict) or response is None:
         message = "Answer doesn't contain correct data!"
         raise TypeError(message)
@@ -41,6 +46,8 @@ def check_response(response):
 
 
 def parse_response(response):
+    """Parses json and returns the message which will be used by bot to
+    send it in Telegram."""
     cur_time = response.get("timestamp")
     cur_date = response.get("date")
     cur_rates = response.get("rates")
@@ -68,15 +75,15 @@ def check_tokens():
 
 def main():
     last_date_exchange = None
-    now_hours = datetime.now().hour
+    now_hour = datetime.now().hour
     while True:
         if (
             last_date_exchange != date.today().day and
-            now_hours > 9
+            now_hour > 9 and
         ):
             if not check_tokens():
                 error_message = (
-                    "Requirement environment variables are missing: "
+                    "Requirement variables in .env file are missing! "
                     "The program forcibly stopped!"
                 )
                 raise NameError(error_message)
@@ -87,7 +94,10 @@ def main():
                 message = parse_response(response)
             bot.send_message(TELEGRAM_CHAT_ID, message)
             last_date_exchange = date.today().day
-        time.sleep(3600)
+            time.sleep(SECONDS_IN_DAY // HOW_OFTEN)
+            now_hours = datetime.now().hour
+            continue
+        time.sleep(RETRY_TIME)
         now_hours = datetime.now().hour
 
 if __name__ == '__main__':
