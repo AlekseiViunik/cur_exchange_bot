@@ -47,8 +47,8 @@ EXCHANGE_TOKEN, BOT_TOKEN, TELEGRAM_ID
 touch .env
 nano .env
 
-EXCHANGE_TOKEN="your_exchange_token_without quotes"\
-BOT_TOKEN="your_bot_token_without quotes"\
+EXCHANGE_TOKEN="your_exchange_token_without quotes"
+BOT_TOKEN="your_bot_token_without quotes"
 TELEGRAM_ID="your_id_without quotes"
 ``` 
 
