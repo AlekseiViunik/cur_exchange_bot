@@ -79,7 +79,7 @@ def main():
     while True:
         if (
             last_date_exchange != date.today().day and
-            now_hour > 9 and
+            now_hour > 9
         ):
             if not check_tokens():
                 error_message = (
