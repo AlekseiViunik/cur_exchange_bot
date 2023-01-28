@@ -3,12 +3,12 @@
 
 ```sh
 Bot, which shows the Lira's currency exchange in telegram. It takes data from fixer.io.
-You can choose how many times a day it shows
+You can choose how many times a day it shows the result.
 ```
 
 ## Running project
 
-Download [here](https://telegram.org/)and install Telegram app. Sign up with it.\
+Download [here](https://telegram.org/) and install Telegram app. Sign up with it.\
 Find BotFather and using its help create your own bot
 and take the BOT_TOKEN.\
 Then find userinfobot and get your id for your 
