@@ -1,5 +1,5 @@
 # cur_exchange_bot
-![Python version](https://img.shields.io/badge/python-3.7-yellow)
+![Python version](https://img.shields.io/badge/python-3.10-yellow)
 
 ```sh
 Bot, which shows the Lira's currency exchange in telegram. It takes data from fixer.io.
