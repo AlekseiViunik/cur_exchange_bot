@@ -1,5 +1,8 @@
 import os
 import requests
+import time
+
+from datetime import date, datetime
 from dotenv import load_dotenv
 from telegram import Bot
 
@@ -64,19 +67,28 @@ def check_tokens():
 
 
 def main():
-    if not check_tokens():
-        error_message = (
-            "Requirement environment variables are missing: "
-            "EXCHANGE_API_TOKEN, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID. "
-            "The program forcibly stopped!"
-        )
-        raise NameError(error_message)
-    bot = Bot(token=TELEGRAM_BOT_TOKEN)
-    response = get_api_answer()
-    if response:
-        response = check_response(response)
-        message = parse_response(response)
-    bot.send_message(TELEGRAM_CHAT_ID, message)
+    last_date_exchange = None
+    now_hours = datetime.now().hour
+    while True:
+        if (
+            last_date_exchange != date.today().day and
+            now_hours > 9
+        ):
+            if not check_tokens():
+                error_message = (
+                    "Requirement environment variables are missing: "
+                    "The program forcibly stopped!"
+                )
+                raise NameError(error_message)
+            bot = Bot(token=TELEGRAM_BOT_TOKEN)
+            response = get_api_answer()
+            if response:
+                response = check_response(response)
+                message = parse_response(response)
+            bot.send_message(TELEGRAM_CHAT_ID, message)
+            last_date_exchange = date.today().day
+        time.sleep(3600)
+        now_hours = datetime.now().hour
 
 if __name__ == '__main__':
     main()
