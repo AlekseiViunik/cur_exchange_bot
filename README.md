@@ -8,8 +8,8 @@ You can choose how many times a day it shows
 
 ## Running project
 
-Download and install Telegram app. Sign up with it. 
-Find BotFathe and using its help create your own bot
+Download and install Telegram app. Sign up with it.\
+Find BotFather and using its help create your own bot
 and take the BOT_TOKEN. 
 Then find userinfobot and get your id for your 
 TELEGRAM_ID value.
