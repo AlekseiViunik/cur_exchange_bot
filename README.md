@@ -8,12 +8,12 @@ You can choose how many times a day it shows
 
 ## Running project
 
-Download and install Telegram app. Sign up with it.\
+Download [here](https://telegram.org/)and install Telegram app. Sign up with it.\
 Find BotFather and using its help create your own bot
 and take the BOT_TOKEN.\
 Then find userinfobot and get your id for your 
 TELEGRAM_ID value.\
-Go to fixer.io, sign up with it and get your EXCHANGE_TOKEN there.
+Go to [fixer](https://fixer.io/), sign up with it and get your EXCHANGE_TOKEN there.
 
 Clone repository. Install and activate virtual environment.
 
